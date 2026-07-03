@@ -1,100 +1,126 @@
 # SLE Digital Twin Living Requirements Specification (SLE-DT LRS)
 
-## Document Purpose
-This document serves as the authoritative living requirements specification for the SLE Digital Twin research program. Future literature reviews, biological discoveries, datasets, and architectural decisions should be merged into this specification while preserving traceability and rationale.
+## Revision Status
+Literature Integrated Through:
+1. SLE DEG Bioinformatics Review.
+2. AI, Biomarkers, and Precision Rheumatology Review.
+3. Digital Twins and the Metaverse in Healthcare Review.
 
 ---
 
-## Current Canonical Thesis Scope
-### Selected Architecture Direction
-**Transcriptomics-First + Molecular-Endotype-Aware Digital Twin**
+## Document Purpose
+This document is the authoritative living requirements specification for the SLE Digital Twin (SLE-DT) thesis project. New literature reviews, datasets, architectures, and biological findings shall be merged into this specification.
 
-Rationale:
-- Transcriptomics is the strongest currently validated evidence layer.
-- Molecular heterogeneity is a core challenge in SLE.
-- Molecular endotypes provide a feasible balance between novelty and thesis scope.
-- Multi-modal Digital Twin capabilities remain future expansion areas.
+---
 
-### Research Positioning
-The SLE-DT is:
-- Explainable.
-- Patient-specific.
-- Immune-tolerance-restoration focused.
-- Molecular-endotype aware.
-- Neutrophil-pathway aware.
-- Interferon-signature aware.
-- Target prioritization focused.
-- Research-oriented rather than a clinical product.
+## Canonical Thesis Direction
+### Selected MVP Architecture
+**Transcriptomics-First + Molecular-Endotype-Aware Healthcare Digital Twin**
+
+### Rationale
+- SLE exhibits substantial molecular heterogeneity.
+- Transcriptomics provides the strongest evidence base among reviewed sources.
+- Molecular endotypes are repeatedly identified as important for precision medicine.
+- Digital Twin architecture should be driven by the research objective rather than by a generic DT framework.
+- The reviewed DT literature explicitly states that no universally optimal Digital Twin architecture exists.
+
+### DT Classification Decision
+Based on currently reviewed literature, the SLE-DT is best classified as a:
+- Patient-specific healthcare Digital Twin.
+- Immune-system focused Digital Twin.
+- Research and discovery Digital Twin.
+- Hypothesis-generation Digital Twin.
+
+It is not currently intended to be:
+- A clinical decision-support system.
+- A regulatory-grade healthcare device.
+- A metaverse-enabled healthcare platform.
 
 ---
 
 ## Executive Thesis Objective
-Develop an explainable, patient-specific, transcriptomics-first Digital Twin for Systemic Lupus Erythematosus (SLE) that models immune dysregulation, identifies disease-driving pathways, simulates restoration of immune tolerance, and prioritizes candidate therapeutic targets.
+Develop an explainable Digital Twin capable of:
+- Modeling patient-specific immune dysregulation.
+- Identifying disease-driving genes and pathways.
+- Stratifying patients into molecular endotypes.
+- Simulating restoration of immune tolerance.
+- Prioritizing candidate therapeutic targets.
+- Generating testable biological hypotheses.
 
-## MVP Definition
+---
+
+## MVP Scope
 ### Included
-- Public SLE transcriptomic datasets.
-- Healthy vs SLE state modeling.
-- Differential expression analysis.
-- Pathway activity analysis.
-- PPI network analysis.
+- Public GEO transcriptomic datasets.
 - Healthy reference twin.
 - Patient-specific twin.
-- Molecular endotype stratification.
-- Virtual pathway perturbation.
-- Explainable target prioritization.
-- Cross-dataset validation.
+- DEG analysis.
+- Pathway analysis.
+- PPI network analysis.
+- Molecular endotype discovery.
+- Virtual perturbation simulations.
+- Explainable target ranking.
+- Technical and biological validation.
 
-### Explicitly Out of Scope
-- Clinical deployment.
-- Drug prescribing.
-- Regulatory-grade decision support.
+### Explicitly Excluded
 - Wet-lab validation.
-- Real-time monitoring.
-- Wearable integration.
-- Imaging integration.
+- Clinical deployment.
+- Real-time patient monitoring.
+- Wearables.
+- Metaverse interfaces.
+- VR environments.
 - Multi-omics integration.
+- Longitudinal digital-health integration.
 
 ---
 
 ## Architecture Evolution Roadmap
-### Phase 1 (Current MVP)
+### Phase 1 (Current Thesis MVP)
 - Transcriptomics.
-- Molecular endotypes.
+- Endotype stratification.
 - Healthy twin.
 - Patient twin.
-- Pathway restoration simulation.
+- Twin comparison.
+- Perturbation engine.
 - Target ranking.
 
-### Phase 2 (Candidate Expansion)
+### Phase 2
 - Proteomics.
-- Cytokine signatures.
-- Serologic biomarkers.
-- Composite biomarker scoring.
-- Therapy-response prediction.
+- Cytokines.
+- Serology.
+- Composite biomarkers.
+- Treatment-response prediction.
 
-### Phase 3 (Longitudinal Digital Twin)
+### Phase 3
+- Longitudinal twins.
 - EHR integration.
 - Wearables.
 - Digital biomarkers.
-- Continuous recalibration.
 - Drift monitoring.
-- Longitudinal patient models.
+- Continuous feedback loops.
+
+### Phase 4
+- Organ-specific twins.
+- Multimodal healthcare twins.
+- System-wide lupus twins.
 
 ---
 
 ## Scientific Foundation
 ### Immune Tolerance Restoration
-Primary system objective is restoration of immune homeostasis rather than disease prediction.
+Primary goal: restoration of immune homeostasis.
 
 ### Neutrophil Biology
-Mandatory pathway categories:
+Mandatory pathways:
 - Neutrophil activation.
 - Neutrophil-mediated immunity.
 - Neutrophil degranulation.
 
-### Hub Genes
-Priority monitoring targets:
+### Interferon Biology
+Mandatory pathway family:
+- Type-I interferon signaling.
+
+### Priority Hub Genes
 - CCNB2
 - CDCA8
 - AURKB
@@ -103,21 +129,18 @@ Priority monitoring targets:
 - BIRC5
 - UBE2C
 
-### Interferon Biology
-The Type-I interferon axis shall be modeled as a first-class pathway due to its relevance to molecular stratification and treatment response.
-
 ---
 
 ## Research Questions
-### Primary Question
-Can an explainable transcriptomic Digital Twin identify pathways whose correction most effectively restores an SLE immune state toward a healthy immune state?
+### Primary
+Can an explainable transcriptomic Digital Twin identify biological corrections that move an SLE immune state toward a healthy immune state?
 
-### Secondary Questions
-- Which pathways explain the largest disease-state deviation?
-- Are neutrophil pathways consistently dominant?
-- Are interferon-signature endotypes observable?
-- Which genes remain reproducibly important across cohorts?
-- Can restoration-oriented ranking generate biologically plausible targets?
+### Secondary
+- Which pathways drive disease-state deviation?
+- Are neutrophil pathways dominant?
+- Are interferon-based endotypes present?
+- Which mechanisms are reproducible across cohorts?
+- Which restoration hypotheses appear most biologically plausible?
 
 ---
 
@@ -126,186 +149,172 @@ Can an explainable transcriptomic Digital Twin identify pathways whose correctio
 - GSE162828
 - GSE169080
 
-### Optional Future Sources
+### Future Sources
 - ImmPort
 - ArrayExpress
-- Additional GEO SLE datasets
+- Additional GEO datasets
 
-### Diversity Requirements
-Capture where available:
+### Dataset Requirements
+Capture when available:
 - Age
 - Sex
-- Ethnicity/ancestry
+- Ethnicity
 - Disease subtype
 - Clinical metadata
 
 ---
 
-## Molecular Endotype Stratification
-### Purpose
-Identify biologically distinct SLE subpopulations.
+## Molecular Endotype Layer
+Purpose:
+- Discover biologically meaningful SLE subgroups.
 
-### MVP Endotype Signals
+Signals:
 - Gene-expression similarity.
-- Pathway activity profiles.
 - Interferon activity.
-- Immune pathway activation patterns.
+- Pathway activity.
+- Immune-state signatures.
 
-### Deliverables
-- Patient clusters.
+Deliverables:
 - Endotype definitions.
-- Endotype-specific disease drivers.
+- Cluster descriptions.
+- Endotype-specific targets.
 
 ---
 
 ## Biomarker Framework
-### MVP Biomarkers
+### MVP
 - DEGs.
 - Pathway signatures.
 - Hub genes.
 - Endotype signatures.
 
-### Future Biomarkers
+### Future
 - Proteomic biomarkers.
-- Cytokine panels.
-- Serologic biomarkers.
+- Cytokine biomarkers.
+- Serological biomarkers.
 - Imaging biomarkers.
 - Digital biomarkers.
 
+---
+
+## Digital Twin Architecture Requirements
+### Functional Components
+1. Data ingestion.
+2. Preprocessing.
+3. DEG engine.
+4. Pathway engine.
+5. Network engine.
+6. Endotype engine.
+7. Healthy twin.
+8. Patient twin.
+9. Twin comparison engine.
+10. Perturbation engine.
+11. Explainability engine.
+12. Target ranking engine.
+
 ### Design Principle
-Composite biomarkers should be treated as the preferred long-term direction.
+Architecture must be application-driven and justified by SLE research objectives.
 
 ---
 
-## Data Processing Pipeline
-1. Dataset acquisition.
-2. QC.
-3. Normalization.
-4. Batch correction.
-5. DEG analysis.
-6. Pathway scoring.
-7. Network construction.
-8. Endotype identification.
-9. Twin generation.
-
----
-
-## Healthy Reference Twin
-- Healthy transcriptomic profile.
-- Healthy pathway profile.
-- Healthy network profile.
-
-## Patient Digital Twin
-Layers:
-- Gene layer.
-- Pathway layer.
-- Network layer.
-- Explainability layer.
-- Molecular endotype layer.
-
-## Twin Comparison Engine
-Outputs:
-- Disease-driving genes.
-- Disease-driving pathways.
-- Network disruptions.
-- Candidate restoration opportunities.
-
-## Virtual Perturbation Engine
-Simulations:
-- Single-pathway restoration.
-- Multi-pathway restoration.
-- Hub-gene adjustment.
-
-Outputs:
-- Restoration score.
-- Distance-to-health reduction.
-- Pathway impact ranking.
-
-## Explainability Framework
-Every recommendation should provide:
-- Responsible genes.
-- Responsible pathways.
-- Transcriptomic evidence.
-- Literature support.
-- Endotype context.
-
-## Target Ranking Framework
-Factors:
-- DEG strength.
-- Pathway influence.
-- Network centrality.
-- Restoration impact.
-- Cross-dataset reproducibility.
-
-Outputs:
-- Ranked pathways.
-- Ranked genes.
-- Ranked restoration hypotheses.
-
----
-
-## Responsible AI and Governance
-### Standards
-- TRIPOD+AI alignment.
-- PROBAST+AI considerations.
-
-### Fairness Requirements
-- Population representation review.
-- Generalizability assessment.
-- Bias documentation.
-
-### Future Operational Requirements
-- Drift monitoring.
-- Recalibration.
-- Periodic validation.
-
----
-
-## Validation Strategy
-### Technical
+## Validation and Verification Framework
+### Verification
+- Pipeline correctness.
 - Reproducibility.
-- Stability analysis.
-- Sensitivity analysis.
+- Stability.
 
-### Biological
+### Biological Validation
 Recover:
 - Neutrophil pathways.
 - Interferon pathways.
-- Hub genes.
-- Published biomarkers.
+- Published hub genes.
+- Literature-supported biomarkers.
+
+### Digital Twin Validation Requirement
+Validation shall be treated as a first-class requirement equal in importance to model development.
+
+---
+
+## Feedback Loop Requirements (NEW)
+Although real-time feedback is outside the MVP, future architecture should support:
+- Data refresh.
+- Model recalibration.
+- Performance monitoring.
+- Decision traceability.
+
+---
+
+## Security and Governance Requirements (NEW)
+### Privacy
+- Public datasets only for MVP.
+- No protected patient data.
+
+### Governance
+- Transparent model documentation.
+- Explainable outputs.
+- Bias review.
+
+### Security
+Future systems should support secure handling of health information and integrated data sources.
+
+---
+
+## Responsible AI Requirements
+- TRIPOD+AI alignment.
+- PROBAST+AI considerations.
+- Population representation review.
+- Fairness assessment.
+- Drift monitoring roadmap.
 
 ---
 
 ## Open Research Questions
+The reviewed literature does not answer the following questions.
+
 1. Can deep learning outperform DEG-to-PPI workflows?
-2. Which hub genes remain important under graph-learning approaches?
-3. Can ML recover biologically meaningful genes removed by filtering thresholds?
+2. Which hub genes remain important under graph-learning models?
+3. Can machine learning recover biologically meaningful genes filtered by traditional thresholds?
 4. How accurately can transcriptomics alone predict therapeutic targets?
-5. Are longitudinal SLE cohorts publicly accessible?
-6. How should drift-monitoring be implemented in production Digital Twins?
-7. Can subtype-specific twins outperform generalized twins?
-8. How should wearable biomarkers be integrated?
-9. Which public datasets include longitudinal molecular and digital-health data?
-10. What minimum biomarker combination is required for a clinically useful Lupus Digital Twin?
+5. Are public longitudinal SLE cohorts available?
+6. How should production Digital Twins implement drift monitoring?
+7. Can subtype-specific twins outperform generalized SLE twins?
+8. How should wearable-derived biomarkers be integrated?
+9. Which public datasets contain both molecular and digital-health data?
+10. What minimum biomarker set is necessary for a clinically useful lupus twin?
 11. Has a fully customizable patient-specific SLE Digital Twin already been demonstrated?
+12. Which healthcare Digital Twin category best aligns with lupus research goals?
+13. Would an organ-specific lupus Digital Twin provide sufficient MVP value?
+14. Should long-term architecture evolve toward system-wide or organ-specific twins?
+15. Which lupus target organ would provide the highest-value future organ-level twin?
+16. Are existing lupus organ-simulation platforms available?
+17. Which biological, clinical, behavioral, and environmental variables are essential for a clinically meaningful Lupus-DT?
+18. Which multidisciplinary stakeholders should participate in future development?
 
 ---
 
 ## Expected Thesis Contributions
 - Explainable SLE Digital Twin architecture.
-- Immune-tolerance restoration framework.
-- Molecular-endotype-aware SLE modeling.
-- Neutrophil-centric pathway prioritization.
+- Molecular-endotype-aware disease modeling.
+- Immune tolerance restoration framework.
+- Neutrophil-centric target prioritization.
+- Validation-oriented healthcare DT methodology.
 - Reproducible research platform.
-- Publishable biological hypotheses.
 
 ---
 
 ## References (IEEE)
-[1] Y. Zhao et al., “Identification of Biomarkers and Pathways in Systemic Lupus Erythematosus Through Integrated Bioinformatics Analysis,” 2021.
-[2] GSE162828, GEO.
-[3] GSE169080, GEO.
+[1] Y. Zhao et al., "Identification of Biomarkers and Pathways in Systemic Lupus Erythematosus Through Integrated Bioinformatics Analysis," 2021.
+
+[2] GSE162828, Gene Expression Omnibus.
+
+[3] GSE169080, Gene Expression Omnibus.
+
 [4] STRING Database.
+
 [5] Cytoscape.
+
 [6] M. E. Ritchie et al., limma.
+
 [7] Artificial Intelligence, Biomarkers, and Precision Medicine in Autoimmune Inflammatory Rheumatic Diseases.
+
+[8] Digital Twins and the Metaverse in Healthcare and Industry.
