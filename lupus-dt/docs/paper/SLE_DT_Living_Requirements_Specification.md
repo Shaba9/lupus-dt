@@ -10,16 +10,19 @@
 5. AI for Systemic Lupus Erythematosus Personalized Treatment.
 6. The Role of Health Information Technology in the Control and Management of SLE.
 7. Federated Learning Security and Governance in Healthcare.
+8. Immune Digital Twins for Complex Human Pathologies: Applications, Limitations, and Challenges.
 
 ### Current Revision Purpose
-This revision merges the Federated Learning, privacy, security, and governance review into the existing SLE-DT Living Requirements Specification. The review strengthens governance, privacy, security, stakeholder, validation, and future scaling requirements but does **not** change the current MVP scope.
+This corrected revision restores and strengthens the **Verification**, **Research Questions / Open Questions**, and **References** sections while preserving the latest Immune Digital Twin architecture update. The document should now function as a consolidated living requirements specification rather than a partial architecture outline.
 
 ---
 
 ## 1. Canonical Thesis Direction
 
 ### 1.1 Selected MVP Architecture
-**Transcriptomics-First + Molecular-Endotype-Aware Healthcare Digital Twin**
+**Transcriptomics-First + Molecular-Endotype-Aware Immune Digital Twin**
+
+The project is explicitly framed as an **Immune Digital Twin (IDT)** rather than only a general healthcare Digital Twin. The system models both disease-state deviation and immune-system response patterns relevant to SLE.
 
 ### 1.2 MVP Scope Decision
 The MVP remains focused on:
@@ -30,15 +33,19 @@ The MVP remains focused on:
 - Immune-tolerance restoration.
 - Explainable pathway and target prioritization.
 - Research-only, non-clinical deployment.
+- Modular, FAIR-aligned architecture.
+- Basic scalability and reproducibility design.
 
-The integrated literature continues to support molecular endotyping as the preferred MVP strategy because SLE heterogeneity is a primary modeling challenge and patient grouping/stratification is essential.
+The integrated literature continues to support molecular endotyping as the preferred MVP strategy because SLE heterogeneity is a primary modeling challenge and patient grouping/stratification is essential. The Immune Digital Twin review further supports modeling both pathology-specific events and immune responses, which aligns directly with the SLE-DT objective.
 
 ### 1.3 Research Objective Representation
 The Digital Twin represents:
 - Patient immune state.
 - Disease-state deviation from health.
 - Molecular endotypes.
-- Active pathways.
+- Active immune pathways.
+- Pathology-associated transcriptomic deviation.
+- Immune-response patterns.
 - Candidate restoration opportunities.
 - Patient-specific biological hypotheses.
 
@@ -49,11 +56,18 @@ It does **not** represent:
 - A patient-management application.
 - A production federated-learning system.
 - A regulatory-grade medical device.
+- A drug-response Digital Twin.
+- A full organ-level or whole-body lupus simulator.
+
+### 1.4 Final MVP Identity
+The current thesis MVP is best described as:
+
+> **A modular, FAIR-aligned, transcriptomics-first, molecular-endotype-aware Immune Digital Twin for SLE immune-state modeling and immune-tolerance-restoration hypothesis generation.**
 
 ---
 
 ## 2. Executive Thesis Objective
-Develop an explainable Digital Twin that models patient-specific immune dysregulation, identifies disease-driving pathways, stratifies patients into biologically meaningful subgroups, simulates restoration of immune tolerance, and generates testable therapeutic hypotheses.
+Develop an explainable Immune Digital Twin that models patient-specific immune dysregulation, identifies disease-driving pathways, stratifies patients into biologically meaningful molecular endotypes, simulates immune-tolerance restoration scenarios, and generates testable therapeutic hypotheses.
 
 ---
 
@@ -63,17 +77,20 @@ Develop an explainable Digital Twin that models patient-specific immune dysregul
 - Public GEO datasets.
 - Healthy control cohorts.
 - Differential expression analysis.
-- Pathway enrichment analysis.
+- Pathway enrichment/scoring analysis.
 - Protein-protein interaction (PPI) analysis.
 - Molecular endotype discovery.
 - Healthy reference twin.
-- Patient twin.
+- Patient immune-state twin.
 - Twin comparison engine.
 - Virtual perturbation engine.
-- Explainable target ranking.
+- Explainable target/pathway ranking.
 - Technical validation.
 - Biological validation.
 - Basic public-data governance documentation.
+- FAIR-aligned dataset and artifact organization.
+- Modular software architecture.
+- Reproducible workflow outputs.
 
 ### 3.2 Explicitly Out of Scope for MVP
 - Clinical deployment.
@@ -86,14 +103,86 @@ Develop an explainable Digital Twin that models patient-specific immune dysregul
 - Production federated learning.
 - Processing protected health information.
 - Regulatory approval.
+- Drug-response simulation.
+- Organ-specific simulation.
+- Whole-body lupus simulation.
+- Cloud-production deployment.
 
 ### 3.3 MVP Feasibility Rationale
-The MVP remains feasible because it relies on public transcriptomic datasets and avoids protected clinical data, multi-institutional deployment, real-time monitoring, and regulated clinical use. The Federated Learning review supports future privacy-preserving collaboration but does not justify adding FL to the initial MVP.
+The MVP remains feasible because it relies on public transcriptomic datasets and avoids protected clinical data, multi-institutional deployment, real-time monitoring, and regulated clinical use. The Immune Digital Twin review supports modularity and FAIR alignment from the beginning, but does not require adding multi-omics, drug modeling, organ simulation, or clinical deployment to the thesis MVP.
 
 ---
 
-## 4. SLE Heterogeneity Requirements
-The Health IT review reinforces that SLE presents with highly variable manifestations and disease trajectories.
+## 4. Immune Digital Twin Design Principles
+
+### 4.1 Pathology + Immune Response Requirement
+An effective Immune Digital Twin should represent two foundational elements:
+- Pathology-specific events.
+- Immune-system responses to those events.
+
+For the SLE-DT MVP, this translates into:
+- Disease-state transcriptomic deviation from healthy controls.
+- Immune pathway activity differences.
+- Molecular endotypes reflecting immune-response variation.
+- Restoration simulations that estimate movement toward healthy immune-state behavior.
+
+### 4.2 Modular Architecture Requirement
+The SLE-DT shall be designed as a modular research platform rather than a monolithic system. Each module should answer a specific research question and be independently testable.
+
+Required MVP modules:
+1. Data ingestion module.
+2. Quality-control and normalization module.
+3. Differential expression module.
+4. Pathway scoring module.
+5. PPI/network analysis module.
+6. Molecular endotype module.
+7. Healthy reference twin module.
+8. Patient immune-state twin module.
+9. Twin comparison module.
+10. Virtual perturbation module.
+11. Explainability module.
+12. Target/pathway ranking module.
+13. Validation and verification module.
+14. Governance documentation module.
+
+Future modules may include:
+- Biomarker prediction.
+- Flare prediction.
+- Treatment-response modeling.
+- Organ-specific simulation.
+- Multi-omics integration.
+- Federated learning.
+- Digital biomarker integration.
+
+### 4.3 FAIR Principles Requirement
+The SLE-DT should align data and model artifacts with FAIR principles:
+- **Findable:** datasets, gene signatures, pathway sets, models, and outputs should have clear identifiers and metadata.
+- **Accessible:** public datasets and processed artifacts should have documented access conditions.
+- **Interoperable:** gene identifiers, pathway definitions, and metadata schemas should use reusable standards where feasible.
+- **Reusable:** code, parameters, preprocessing steps, and model outputs should be documented for reproducibility.
+
+### 4.4 Scalability Requirement
+The MVP does not require production-scale cloud deployment. However, architecture should avoid design choices that prevent future scaling.
+
+Scalability considerations:
+- Ability to add new SLE cohorts.
+- Ability to add new pathway databases.
+- Ability to process incomplete or heterogeneous datasets.
+- Ability to extend from cohort-level analysis to patient-level twin generation.
+- Ability to later incorporate cloud computing if dataset size or computation requirements grow.
+
+### 4.5 Interoperability Requirement
+Future expansion should support integration across datasets and modules. MVP interoperability requirements include:
+- Standardized gene identifiers.
+- Documented pathway source/version.
+- Standardized output formats for pathway scores, endotypes, and rankings.
+- Portable scripts or notebooks.
+- Clear separation between data preprocessing, modeling, simulation, and reporting.
+
+---
+
+## 5. SLE Heterogeneity Requirements
+SLE presents with highly variable manifestations and disease trajectories.
 
 ### Requirements
 - The architecture must assume patient heterogeneity.
@@ -104,17 +193,17 @@ The Health IT review reinforces that SLE presents with highly variable manifesta
 
 ---
 
-## 5. Molecular Endotype Requirements
+## 6. Molecular Endotype Requirements
 Disease subtyping is a foundational requirement.
 
-### 5.1 Required MVP Signals
+### 6.1 Required MVP Signals
 - Gene-expression signatures.
 - Pathway activation profiles.
 - Interferon activity.
 - Immune-state signatures.
 - B-cell-related signatures.
 
-### 5.2 Future Endotype Layers
+### 6.2 Future Endotype Layers
 Potential future grouping strategies identified across reviewed literature:
 - Biological markers.
 - Organ involvement.
@@ -123,27 +212,28 @@ Potential future grouping strategies identified across reviewed literature:
 - Treatment-response patterns.
 - Longitudinal clinical trajectories.
 
-### 5.3 Current MVP Decision
+### 6.3 Current MVP Decision
 Biological and transcriptomic stratification remains the preferred MVP approach because it is directly supported by available data and aligns with the thesis goal of molecular-endotype-aware immune-state modeling.
 
 ---
 
-## 6. Scientific Foundation
+## 7. Scientific Foundation
 
-### 6.1 Core Biological Themes
+### 7.1 Core Biological Themes
 - Immune tolerance restoration.
 - Molecular heterogeneity.
 - Patient stratification.
 - Explainable AI.
 - Transcriptomic disease-state modeling.
+- Pathology-specific immune response modeling.
 
-### 6.2 Key Disease Mechanism Categories
+### 7.2 Key Disease Mechanism Categories
 - Neutrophil biology.
 - Interferon biology.
 - B-cell biology.
 - T-cell regulatory biology.
 
-### 6.3 Priority Hub Genes
+### 7.3 Priority Hub Genes
 The following hub genes remain priority monitoring targets from prior DEG/PPI literature integration:
 - CCNB2
 - CDCA8
@@ -155,16 +245,16 @@ The following hub genes remain priority monitoring targets from prior DEG/PPI li
 
 ---
 
-## 7. Data Strategy
+## 8. Data Strategy
 
-### 7.1 Core Datasets
+### 8.1 Core Datasets
 - GSE162828.
 - GSE169080.
 
-### 7.2 First-Class Requirement: Healthy Controls
+### 8.2 First-Class Requirement: Healthy Controls
 Healthy-control cohorts are critical for meaningful disease-state comparison and must remain a first-class requirement.
 
-### 7.3 Dataset Documentation Requirements
+### 8.3 Dataset Documentation Requirements
 Capture when available:
 - Age.
 - Sex.
@@ -175,22 +265,37 @@ Capture when available:
 - Treatment history.
 - Cohort provenance.
 - Dataset source and access conditions.
+- Data modality.
+- Platform/assay type.
+- Sample count by class/endotype where available.
 
-### 7.4 Data Standardization Requirements
+### 8.4 Data Standardization Requirements
 Because SLE data may originate from multiple specialties and diagnostic modalities:
 - Data normalization shall be documented.
 - Batch-effect correction shall be documented.
 - Missing-data handling shall be documented.
 - Feature provenance shall be documented.
 - Dataset inclusion/exclusion criteria shall be documented.
+- Gene identifier mapping shall be documented.
+- Pathway database versions shall be documented.
 
-### 7.5 Governance Impact of Current MVP Data Choice
+### 8.5 FAIR Data and Model Artifact Requirements
+The project should maintain:
+- Dataset inventory.
+- Processed expression matrix metadata.
+- DEG result metadata.
+- Pathway scoring metadata.
+- Model configuration metadata.
+- Simulation parameter metadata.
+- Output ranking provenance.
+
+### 8.6 Governance Impact of Current MVP Data Choice
 Because the MVP uses public datasets only and does not process protected health information, the immediate privacy risk is lower than in clinical or multi-institutional deployment. However, data provenance, dataset usage restrictions, reproducibility, and ethical documentation still remain required.
 
 ---
 
-## 8. Clinical Context Layer
-The Health IT review highlights that SLE management often involves multiple specialties:
+## 9. Clinical Context Layer
+SLE management often involves multiple specialties:
 - Rheumatology.
 - Nephrology.
 - Dermatology.
@@ -201,9 +306,9 @@ Future Digital Twin evolution should support incorporation of disease informatio
 
 ---
 
-## 9. Digital Twin Functional Architecture
+## 10. Digital Twin Functional Architecture
 
-### 9.1 MVP Functional Components
+### 10.1 MVP Functional Components
 1. Data ingestion module.
 2. Quality-control and normalization module.
 3. Differential gene expression engine.
@@ -211,26 +316,39 @@ Future Digital Twin evolution should support incorporation of disease informatio
 5. PPI/network analysis engine.
 6. Molecular endotype discovery engine.
 7. Healthy reference twin constructor.
-8. Patient twin constructor.
+8. Patient immune-state twin constructor.
 9. Twin comparison engine.
 10. Virtual perturbation engine.
 11. Explainability engine.
-12. Target ranking engine.
+12. Target/pathway ranking engine.
 13. Technical validation module.
 14. Biological validation module.
-15. Governance documentation module.
+15. FAIR/governance documentation module.
 
-### 9.2 Design Constraint
+### 10.2 Design Constraint
 No universally optimal Digital Twin architecture has been established across the reviewed literature. Therefore, the SLE-DT architecture must remain application-driven and justified by the thesis objective: transcriptomics-first immune-state modeling and immune-tolerance restoration.
+
+### 10.3 Modular Design Requirement
+Modules should be loosely coupled so that future components can be added without rewriting the entire system. For example, the same patient twin representation should later support additional modules such as proteomics, EHR data, digital biomarkers, federated learning, or treatment-response modeling.
+
+### 10.4 Model Input and Output Control
+The architecture should distinguish between:
+- Raw input data.
+- Processed research data.
+- Intermediate model outputs.
+- Final hypothesis rankings.
+- Future clinical-facing outputs.
+
+For the MVP, all outputs are research artifacts and should not be presented as clinical recommendations.
 
 ---
 
-## 10. Security, Privacy, and Governance Requirements
+## 11. Security, Privacy, and Governance Requirements
 
-### 10.1 Requirement Status
-Security, privacy, compliance, and governance are elevated to first-class requirements. They shall not be treated as post-development add-ons.
+### 11.1 Requirement Status
+Security, privacy, compliance, and governance are first-class requirements. They shall not be treated as post-development add-ons.
 
-### 10.2 Applicability to MVP
+### 11.2 Applicability to MVP
 The MVP uses public datasets and does not access protected health information. Therefore:
 - Full clinical compliance workflows are not required for the MVP.
 - Production federated learning is not required for the MVP.
@@ -241,18 +359,20 @@ However, the MVP should still include:
 - Dataset usage documentation.
 - Reproducibility documentation.
 - Code and model traceability.
+- Output interpretation guardrails.
 - Clear statement that outputs are research hypotheses, not clinical recommendations.
 
-### 10.3 Governance Principles
+### 11.3 Governance Principles
 Future system evolution shall follow:
 - Privacy-by-design.
 - Security-by-design.
 - Explainability-by-design.
 - Validation-by-design.
+- FAIR-by-design.
 - Human oversight.
 - Documentation-first model development.
 
-### 10.4 Privacy Requirements
+### 11.4 Privacy Requirements
 For the MVP:
 - Use public data only.
 - Do not process protected health information.
@@ -265,8 +385,9 @@ For future clinical or institutional deployments:
 - Evaluate privacy leakage risks.
 - Define stakeholder approval workflows.
 - Perform privacy impact assessment before sensitive-data access.
+- Define informed-consent and patient-rights processes where patient-level clinical data are used.
 
-### 10.5 Security Requirements
+### 11.5 Security Requirements
 Future architectures should support:
 - Secure communications.
 - Encryption for data/model transfer.
@@ -275,8 +396,20 @@ Future architectures should support:
 - Threat modeling.
 - Security monitoring.
 - Incident response planning.
+- Safeguards against intentional or accidental data corruption.
 
-### 10.6 AI Governance Requirements
+### 11.6 Access-Control Requirements
+Future clinical or patient-facing systems should define access rules for:
+- Raw patient data.
+- Processed patient data.
+- Model predictions.
+- Research outputs.
+- Clinical-facing results.
+- Patient-facing summaries.
+
+Current literature does not specify which exact SLE-DT components should be clinician-only; this remains open.
+
+### 11.7 AI Governance Requirements
 Future AI-enabled Digital Twin extensions should support:
 - Human approval workflows.
 - Decision traceability.
@@ -285,15 +418,16 @@ Future AI-enabled Digital Twin extensions should support:
 - Privacy review before sensitive-data access.
 - Governance review before deployment.
 - Documentation of model limitations and intended use.
+- Continuous auditing where systems influence clinical or research decisions.
 
 ---
 
-## 11. Federated Learning Roadmap
+## 12. Federated Learning Roadmap
 
-### 11.1 Status
+### 12.1 Status
 Federated Learning is a **future architecture option**, not an MVP requirement.
 
-### 11.2 Potential Benefits for Future SLE-DT
+### 12.2 Potential Benefits for Future SLE-DT
 Federated Learning may support:
 - Multi-institution collaboration.
 - Larger patient populations.
@@ -301,7 +435,7 @@ Federated Learning may support:
 - Reduced need for centralized patient-data storage.
 - Privacy-preserving model development across hospitals and research institutions.
 
-### 11.3 Key Risks
+### 12.3 Key Risks
 Federated Learning does not automatically eliminate privacy risk. Future FL-based SLE-DT systems must address:
 - Model parameter leakage.
 - Reconstruction attacks.
@@ -310,7 +444,7 @@ Federated Learning does not automatically eliminate privacy risk. Future FL-base
 - Communication-channel vulnerabilities.
 - Institutional governance complexity.
 
-### 11.4 Candidate Future Capabilities
+### 12.4 Candidate Future Capabilities
 Future architecture may investigate:
 - Federated learning.
 - Secure aggregation.
@@ -320,21 +454,21 @@ Future architecture may investigate:
 - Automated compliance verification.
 - Federated model monitoring.
 
-### 11.5 FL Design Requirement
+### 12.5 FL Design Requirement
 If FL becomes part of a future SLE-DT phase, security, privacy, legal, governance, and clinical stakeholders must be involved from project initiation rather than after model development.
 
 ---
 
-## 12. Cross-Disciplinary Stakeholder Requirements
+## 13. Cross-Disciplinary Stakeholder Requirements
 
-### 12.1 MVP Stakeholders
+### 13.1 MVP Stakeholders
 The MVP should incorporate or seek feedback from:
 - Bioinformatics experts.
 - AI/ML researchers.
 - Immunology experts.
 - Rheumatology experts when available.
 
-### 12.2 Future Clinical / Federated / Institutional Stakeholders
+### 13.2 Future Clinical / Federated / Institutional Stakeholders
 Future phases should include:
 - Rheumatologists.
 - Immunologists.
@@ -351,27 +485,28 @@ Future phases should include:
 - Privacy specialists.
 - Legal/compliance experts.
 - Governance stakeholders.
+- Regulatory specialists.
 
-### 12.3 Stakeholder Principle
-Healthcare AI and Federated Learning systems are socio-technical systems. Technical model development must be aligned with clinical, privacy, legal, governance, and security requirements.
+### 13.3 Stakeholder Principle
+Healthcare AI, Immune Digital Twins, and Federated Learning systems are socio-technical systems. Technical model development must be aligned with clinical, privacy, legal, governance, regulatory, and security requirements.
 
 ---
 
-## 13. Future AI Capability Roadmap
+## 14. Future AI Capability Roadmap
 
-### 13.1 Single-Cell Extensions
+### 14.1 Single-Cell Extensions
 - scRNA-seq integration.
 - Automated cell-state annotation.
 - Cell-state discovery.
 
-### 13.2 Multi-Modal Patient Monitoring
+### 14.2 Multi-Modal Patient Monitoring
 Future phases may investigate:
 - Clinical laboratory data.
 - Patient-reported outcomes.
 - Digital biomarkers.
 - Wearable data.
 
-### 13.3 Multi-Omics Digital Twin
+### 14.3 Multi-Omics Digital Twin
 Future phases may investigate:
 - Genomics.
 - Epigenomics.
@@ -379,7 +514,7 @@ Future phases may investigate:
 - Cytokine profiling.
 - Immune-cell phenotyping.
 
-### 13.4 Federated / Privacy-Preserving AI
+### 14.4 Federated / Privacy-Preserving AI
 Future phases may investigate:
 - Federated learning.
 - Secure aggregation.
@@ -389,16 +524,16 @@ Future phases may investigate:
 
 ---
 
-## 14. Validation and Verification Framework
+## 15. Validation and Verification Framework
 
-### 14.1 Technical Validation
+### 15.1 Technical Validation
 - Reproducibility.
 - Stability.
 - Cross-dataset consistency.
 - Sensitivity analysis.
 - Ranking robustness.
 
-### 14.2 Biological Validation
+### 15.2 Biological Validation
 Recover:
 - Neutrophil pathways.
 - Interferon pathways.
@@ -406,14 +541,14 @@ Recover:
 - Published hub genes.
 - Literature-supported biomarkers.
 
-### 14.3 Stratification Validation
+### 15.3 Stratification Validation
 Assess:
 - Endotype stability.
 - Cohort reproducibility.
 - Within-endotype pathway consistency.
 - Whether pathway rankings differ meaningfully across endotypes.
 
-### 14.4 Security Validation (Future Phase)
+### 15.4 Security Validation (Future Phase)
 Future implementations involving sensitive or institutional data should evaluate:
 - Privacy leakage risk.
 - Membership inference risk.
@@ -423,7 +558,7 @@ Future implementations involving sensitive or institutional data should evaluate
 - Access-control effectiveness.
 - Threat-model coverage.
 
-### 14.5 Governance Validation (Future Phase)
+### 15.5 Governance Validation (Future Phase)
 Future implementations should evaluate:
 - Compliance readiness.
 - Documentation completeness.
@@ -432,12 +567,12 @@ Future implementations should evaluate:
 - Approval workflows.
 - Auditability.
 
-### 14.6 Validation Principle
+### 15.6 Validation Principle
 Validation must include more than performance metrics. For future clinical or federated versions, validation must include biological plausibility, software reproducibility, privacy risk, security risk, governance readiness, and stakeholder review.
 
 ---
 
-## 15. Open Research Questions
+## 16. Open Research Questions
 Unanswered by currently reviewed literature:
 
 1. Can deep learning outperform DEG-to-PPI workflows?
@@ -472,7 +607,7 @@ Unanswered by currently reviewed literature:
 
 ---
 
-## 16. Questions Partially Addressed by Current Literature
+### 16.1 Questions Partially Addressed by Current Literature
 - SLE heterogeneity is a major modeling challenge.
 - Patient stratification is necessary.
 - Biological grouping appears more aligned with the current MVP than symptom-only grouping.
@@ -527,3 +662,5 @@ The MVP should not include Federated Learning, multi-omics integration, EHR inte
 [11] “The Role of Health Information Technology in the Control and Management of Systemic Lupus Erythematosus.”
 
 [12] “Federated Learning Security and Governance in Healthcare.”
+
+[13] A. Niarakis et al., “Immune digital twins for complex human pathologies: applications, limitations, and challenges,” npj Systems Biology and Applications, vol. 10, no. 1, Art. no. 141, 2024, doi: 10.1038/s41540-024-00450-5.
