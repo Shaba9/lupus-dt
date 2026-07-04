@@ -11,9 +11,10 @@
 6. The Role of Health Information Technology in the Control and Management of SLE.
 7. Federated Learning Security and Governance in Healthcare.
 8. Immune Digital Twins for Complex Human Pathologies: Applications, Limitations, and Challenges.
+9. Deep Learning-Based Prediction of Autoimmune Diseases.
 
 ### Current Revision Purpose
-This corrected revision restores and strengthens the **Verification**, **Research Questions / Open Questions**, and **References** sections while preserving the latest Immune Digital Twin architecture update. The document should now function as a consolidated living requirements specification rather than a partial architecture outline.
+This revision merges the deep-learning/TCR-repertoire literature review into the living specification while preserving the current MVP scope. The new review adds future architecture guidance for T-cell receptor sequencing, multi-instance learning, CNN motif-detection models, BiLSTM-attention sequence models, immune repertoire features, and transfer-learning possibilities. Because the article does **not** include SLE, these additions are treated as future or stretch capabilities, not MVP requirements.
 
 ---
 
@@ -27,7 +28,7 @@ The project is explicitly framed as an **Immune Digital Twin (IDT)** rather than
 ### 1.2 MVP Scope Decision
 The MVP remains focused on:
 - Systemic Lupus Erythematosus (SLE).
-- Transcriptomic data.
+- Bulk transcriptomic data.
 - Healthy-vs-disease immune-state modeling.
 - Molecular endotype discovery.
 - Immune-tolerance restoration.
@@ -36,7 +37,7 @@ The MVP remains focused on:
 - Modular, FAIR-aligned architecture.
 - Basic scalability and reproducibility design.
 
-The integrated literature continues to support molecular endotyping as the preferred MVP strategy because SLE heterogeneity is a primary modeling challenge and patient grouping/stratification is essential. The Immune Digital Twin review further supports modeling both pathology-specific events and immune responses, which aligns directly with the SLE-DT objective.
+The deep-learning/TCR review does **not** change the MVP because SLE was not included in the study and because the proposed models rely on TCR-seq data rather than the transcriptomic datasets selected for the thesis MVP. Its main value is as a future roadmap for immune-repertoire and sequence-modeling extensions.
 
 ### 1.3 Research Objective Representation
 The Digital Twin represents:
@@ -58,6 +59,7 @@ It does **not** represent:
 - A regulatory-grade medical device.
 - A drug-response Digital Twin.
 - A full organ-level or whole-body lupus simulator.
+- A TCR-seq diagnostic classifier in the MVP.
 
 ### 1.4 Final MVP Identity
 The current thesis MVP is best described as:
@@ -107,9 +109,12 @@ Develop an explainable Immune Digital Twin that models patient-specific immune d
 - Organ-specific simulation.
 - Whole-body lupus simulation.
 - Cloud-production deployment.
+- TCR-seq model training.
+- TCR repertoire classification.
+- CNN/BiLSTM diagnostic classifiers.
 
 ### 3.3 MVP Feasibility Rationale
-The MVP remains feasible because it relies on public transcriptomic datasets and avoids protected clinical data, multi-institutional deployment, real-time monitoring, and regulated clinical use. The Immune Digital Twin review supports modularity and FAIR alignment from the beginning, but does not require adding multi-omics, drug modeling, organ simulation, or clinical deployment to the thesis MVP.
+The MVP remains feasible because it relies on public transcriptomic datasets and avoids protected clinical data, multi-institutional deployment, real-time monitoring, regulated clinical use, and specialized immune-repertoire sequencing inputs. The TCR deep-learning paper supports future immune-sequence modeling but does not justify expanding the MVP beyond transcriptomics.
 
 ---
 
@@ -153,6 +158,9 @@ Future modules may include:
 - Multi-omics integration.
 - Federated learning.
 - Digital biomarker integration.
+- TCR repertoire modeling.
+- Multi-instance immune-repertoire learning.
+- Sequence-attention explainability.
 
 ### 4.3 FAIR Principles Requirement
 The SLE-DT should align data and model artifacts with FAIR principles:
@@ -170,6 +178,7 @@ Scalability considerations:
 - Ability to process incomplete or heterogeneous datasets.
 - Ability to extend from cohort-level analysis to patient-level twin generation.
 - Ability to later incorporate cloud computing if dataset size or computation requirements grow.
+- Ability to add non-transcriptomic immune-repertoire modules later without replacing the MVP architecture.
 
 ### 4.5 Interoperability Requirement
 Future expansion should support integration across datasets and modules. MVP interoperability requirements include:
@@ -178,6 +187,12 @@ Future expansion should support integration across datasets and modules. MVP int
 - Standardized output formats for pathway scores, endotypes, and rankings.
 - Portable scripts or notebooks.
 - Clear separation between data preprocessing, modeling, simulation, and reporting.
+
+Future TCR integration would additionally require:
+- TCR sequence metadata standards.
+- Patient-level repertoire identifiers.
+- Encoding method documentation.
+- Sequence model parameter documentation.
 
 ---
 
@@ -190,6 +205,7 @@ SLE presents with highly variable manifestations and disease trajectories.
 - Disease modeling should not assume a single dominant disease mechanism across all patients.
 - Validation should assess whether prioritized pathways remain stable within identified endotypes.
 - Future clinical expansions should be capable of integrating organ involvement, symptom clusters, disease severity, treatment history, and patient-reported outcomes.
+- Future immune-repertoire expansions should evaluate whether TCR features vary across SLE endotypes.
 
 ---
 
@@ -211,6 +227,8 @@ Potential future grouping strategies identified across reviewed literature:
 - Symptom clusters.
 - Treatment-response patterns.
 - Longitudinal clinical trajectories.
+- TCR repertoire patterns.
+- Attention-derived sequence motifs.
 
 ### 6.3 Current MVP Decision
 Biological and transcriptomic stratification remains the preferred MVP approach because it is directly supported by available data and aligns with the thesis goal of molecular-endotype-aware immune-state modeling.
@@ -226,12 +244,14 @@ Biological and transcriptomic stratification remains the preferred MVP approach 
 - Explainable AI.
 - Transcriptomic disease-state modeling.
 - Pathology-specific immune response modeling.
+- T-cell receptor repertoire modeling as a future immune-feature layer.
 
 ### 7.2 Key Disease Mechanism Categories
 - Neutrophil biology.
 - Interferon biology.
 - B-cell biology.
 - T-cell regulatory biology.
+- T-cell receptor diversity and immune repertoire signatures as a future extension.
 
 ### 7.3 Priority Hub Genes
 The following hub genes remain priority monitoring targets from prior DEG/PPI literature integration:
@@ -247,7 +267,7 @@ The following hub genes remain priority monitoring targets from prior DEG/PPI li
 
 ## 8. Data Strategy
 
-### 8.1 Core Datasets
+### 8.1 Core MVP Datasets
 - GSE162828.
 - GSE169080.
 
@@ -289,7 +309,16 @@ The project should maintain:
 - Simulation parameter metadata.
 - Output ranking provenance.
 
-### 8.6 Governance Impact of Current MVP Data Choice
+### 8.6 Future TCR Dataset Strategy
+The deep-learning autoimmune disease review used publicly available TCR-seq data from immuneACCESS and referenced open repositories. For SLE-DT, this suggests a future dataset search requirement:
+- Determine whether SLE-specific TCR-seq datasets exist.
+- Determine whether lupus cohorts are available through immuneACCESS or related immune-repertoire repositories.
+- Document disease labels, cohort sizes, control cohorts, sequence metadata, and class imbalance.
+- Determine whether TCR repertoires can be mapped to transcriptomic endotypes.
+
+This remains future work and is not required for the MVP.
+
+### 8.7 Governance Impact of Current MVP Data Choice
 Because the MVP uses public datasets only and does not process protected health information, the immediate privacy risk is lower than in clinical or multi-institutional deployment. However, data provenance, dataset usage restrictions, reproducibility, and ethical documentation still remain required.
 
 ---
@@ -321,7 +350,7 @@ Future Digital Twin evolution should support incorporation of disease informatio
 10. Virtual perturbation engine.
 11. Explainability engine.
 12. Target/pathway ranking engine.
-13. Technical validation module.
+13. Technical validation and verification module.
 14. Biological validation module.
 15. FAIR/governance documentation module.
 
@@ -329,7 +358,7 @@ Future Digital Twin evolution should support incorporation of disease informatio
 No universally optimal Digital Twin architecture has been established across the reviewed literature. Therefore, the SLE-DT architecture must remain application-driven and justified by the thesis objective: transcriptomics-first immune-state modeling and immune-tolerance restoration.
 
 ### 10.3 Modular Design Requirement
-Modules should be loosely coupled so that future components can be added without rewriting the entire system. For example, the same patient twin representation should later support additional modules such as proteomics, EHR data, digital biomarkers, federated learning, or treatment-response modeling.
+Modules should be loosely coupled so that future components can be added without rewriting the entire system. For example, the same patient twin representation should later support additional modules such as proteomics, EHR data, digital biomarkers, federated learning, treatment-response modeling, or TCR repertoire modeling.
 
 ### 10.4 Model Input and Output Control
 The architecture should distinguish between:
@@ -368,6 +397,7 @@ Future system evolution shall follow:
 - Security-by-design.
 - Explainability-by-design.
 - Validation-by-design.
+- Verification-by-design.
 - FAIR-by-design.
 - Human oversight.
 - Documentation-first model development.
@@ -498,6 +528,8 @@ Healthcare AI, Immune Digital Twins, and Federated Learning systems are socio-te
 - scRNA-seq integration.
 - Automated cell-state annotation.
 - Cell-state discovery.
+- Future immune-cell-state modeling for B cells, T cells, neutrophils, and other immune populations.
+- Future comparison of single-cell immune states against transcriptomic molecular endotypes.
 
 ### 14.2 Multi-Modal Patient Monitoring
 Future phases may investigate:
@@ -505,6 +537,9 @@ Future phases may investigate:
 - Patient-reported outcomes.
 - Digital biomarkers.
 - Wearable data.
+- Longitudinal symptom tracking.
+- Disease activity scores.
+- Organ involvement data.
 
 ### 14.3 Multi-Omics Digital Twin
 Future phases may investigate:
@@ -513,6 +548,9 @@ Future phases may investigate:
 - Proteomics.
 - Cytokine profiling.
 - Immune-cell phenotyping.
+- TCR repertoire sequencing.
+- Autoantibody profiles.
+- Complement-related biomarkers.
 
 ### 14.4 Federated / Privacy-Preserving AI
 Future phases may investigate:
@@ -521,34 +559,140 @@ Future phases may investigate:
 - Differential privacy.
 - Privacy-preserving analytics.
 - Agentic AI governance.
+- Federated validation.
+- Privacy leakage auditing.
+- Secure multi-institution collaboration.
+
+### 14.5 Transfer Learning Roadmap
+Transfer learning may be investigated as a future or stretch capability for limited SLE datasets.
+
+Potential uses:
+- Pretraining on larger immune or biomedical datasets.
+- Fine-tuning on SLE-specific transcriptomic cohorts.
+- Fine-tuning autoimmune TCR models on SLE-specific TCR datasets if such datasets become available.
+- Improving performance in small or narrowly defined endotypes.
+- Supporting future rare-subtype modeling.
+
+Transfer learning is **not required for the MVP**, but it may become useful if the available SLE cohorts are too small for robust modeling.
+
+### 14.6 TCR Repertoire Deep Learning Roadmap
+The reviewed deep-learning autoimmune disease paper introduces methods that may be relevant to future immune-repertoire extensions of the SLE-DT. However, because the paper does **not** include SLE, these approaches should remain future work rather than MVP requirements.
+
+Future methods may include:
+- **Multi-Instance Learning (MIL):** representing each patient as a “bag” of TCR sequences, where each TCR sequence is an instance and the patient/disease/endotype label is the bag label.
+- **CNN-based motif detection:** identifying local amino-acid sequence motifs that may be associated with autoimmune immune signatures.
+- **BiLSTM with attention:** modeling long-range sequence dependencies and prioritizing biologically relevant TCR sequence regions.
+- **Biochemical amino-acid encoding:** transforming TCR amino-acid sequences into numerical vectors based on biochemical properties.
+- **Attention-based interpretability:** using attention weights as exploratory evidence for immune-sequence regions associated with disease or endotype status.
+
+Potential future integration with SLE-DT:
+- Add TCR repertoire features as an immune-cell-layer extension.
+- Compare TCR-based patient groupings against transcriptomic molecular endotypes.
+- Use TCR features to refine patient immune-state representations.
+- Evaluate whether TCR motifs correlate with neutrophil, interferon, B-cell, or T-cell pathway activity.
+- Investigate whether immune-repertoire features improve endotype stability or restoration-target prioritization.
+
+TCR-seq modeling should remain **out of scope for the MVP** unless SLE-specific TCR datasets are later identified and validated.
+
+### 14.7 Drug Development Roadmap
+Immune Digital Twins may eventually support:
+- Drug discovery.
+- Candidate screening.
+- Mechanistic understanding.
+- Treatment optimization.
+- Clinical trial design.
+- Endotype-specific therapeutic hypothesis generation.
+
+However, drug-response Digital Twins require greater biological complexity than the current MVP and remain future work.
 
 ---
 
-## 15. Validation and Verification Framework
+## 15. Verification, Validation, Auditing, and Monitoring Framework
 
-### 15.1 Technical Validation
+### 15.1 Purpose of Verification vs. Validation
+This section is intentionally separated from general architecture requirements because the thesis system must demonstrate both:
+
+- **Verification:** the system was built correctly according to requirements.
+- **Validation:** the system produces scientifically meaningful, reproducible, and biologically interpretable outputs for SLE research.
+
+### 15.2 Technical Verification
+The MVP shall verify that each implemented module performs its stated function and produces traceable outputs.
+
+Module-level verification should confirm:
+- Data ingestion module correctly loads expected input datasets.
+- Quality-control module records filtering, normalization, and missing-data decisions.
+- DEG engine produces reproducible outputs under fixed parameters.
+- Pathway engine uses documented pathway definitions and versions.
+- PPI/network module records database/source assumptions.
+- Endotype module records clustering method, parameters, and reproducibility checks.
+- Healthy reference twin module documents how baseline profiles are created.
+- Patient twin module documents how patient-state representations are generated.
+- Twin comparison engine documents distance/deviation metrics.
+- Virtual perturbation engine documents perturbation assumptions and output calculations.
+- Explainability engine identifies gene/pathway evidence supporting rankings.
+- Target/pathway ranking engine records scoring logic and ranking weights.
+- Governance documentation module records dataset provenance and intended-use boundaries.
+
+### 15.3 Verification Deliverables
+The thesis MVP should produce:
+- Dataset inventory.
+- Preprocessing log.
+- DEG parameter log.
+- Pathway database/version log.
+- PPI source log.
+- Endotype method log.
+- Twin construction method description.
+- Perturbation method description.
+- Ranking equation or scoring-rule description.
+- Reproducibility instructions.
+- Known limitations statement.
+
+### 15.4 Technical Validation
+The MVP should validate technical reliability through:
 - Reproducibility.
 - Stability.
 - Cross-dataset consistency.
 - Sensitivity analysis.
 - Ranking robustness.
+- Module-level testing.
 
-### 15.2 Biological Validation
+### 15.5 Biological Validation
 Recover:
 - Neutrophil pathways.
 - Interferon pathways.
 - B-cell signatures.
+- T-cell-related immune signals where supported by transcriptomic data.
 - Published hub genes.
 - Literature-supported biomarkers.
 
-### 15.3 Stratification Validation
+### 15.6 Stratification Validation
 Assess:
 - Endotype stability.
 - Cohort reproducibility.
 - Within-endotype pathway consistency.
 - Whether pathway rankings differ meaningfully across endotypes.
+- Biological interpretability of patient clusters.
 
-### 15.4 Security Validation (Future Phase)
+### 15.7 Data Quality Validation
+Before incorporation into the twin, data should be evaluated for:
+- Missingness.
+- Batch effects.
+- Identifier consistency.
+- Sample-label consistency.
+- Outlier behavior.
+- Cohort documentation quality.
+
+### 15.8 Future TCR Model Validation
+If TCR-seq is later added, validation should include:
+- Patient-level separation between training and test repertoires.
+- Class-imbalance assessment.
+- Disease/endotype label quality assessment.
+- Attention/motif interpretability review.
+- Independent-cohort validation.
+- Assessment of whether learned TCR features generalize beyond dataset-specific artifacts.
+- Evaluation of whether TCR-derived features improve patient stratification or pathway prioritization.
+
+### 15.9 Security Validation (Future Phase)
 Future implementations involving sensitive or institutional data should evaluate:
 - Privacy leakage risk.
 - Membership inference risk.
@@ -558,7 +702,7 @@ Future implementations involving sensitive or institutional data should evaluate
 - Access-control effectiveness.
 - Threat-model coverage.
 
-### 15.5 Governance Validation (Future Phase)
+### 15.10 Governance Validation (Future Phase)
 Future implementations should evaluate:
 - Compliance readiness.
 - Documentation completeness.
@@ -566,16 +710,47 @@ Future implementations should evaluate:
 - Human-review processes.
 - Approval workflows.
 - Auditability.
+- Regulatory-risk assessment.
 
-### 15.6 Validation Principle
-Validation must include more than performance metrics. For future clinical or federated versions, validation must include biological plausibility, software reproducibility, privacy risk, security risk, governance readiness, and stakeholder review.
+### 15.11 Continuous Auditing and Monitoring
+For the MVP, auditing means reproducibility and traceability of research outputs. For future clinical or federated versions, continuous auditing may include:
+- Data drift monitoring.
+- Model performance monitoring.
+- Privacy leakage monitoring.
+- Security-event monitoring.
+- Retraining triggers.
+- Regulatory documentation updates.
+
+### 15.12 Validation Principle
+Validation must include more than performance metrics. For future clinical, federated, or multi-modal versions, validation must include:
+- Biological plausibility.
+- Software reproducibility.
+- Privacy risk.
+- Security risk.
+- Governance readiness.
+- Stakeholder review.
+- Dataset generalizability.
+- Interpretability of model outputs.
+
+### 15.13 Verification and Validation Acceptance Criteria
+The MVP should be considered complete only if it can demonstrate:
+- Successful construction of a healthy reference twin.
+- Successful construction of patient immune-state twins.
+- Reproducible DEG and pathway outputs.
+- At least one interpretable molecular endotype analysis.
+- A documented twin comparison method.
+- A documented virtual perturbation method.
+- Ranked candidate pathways/targets with explainability evidence.
+- Recovery or discussion of known SLE mechanisms from reviewed literature.
+- Clear separation between research hypotheses and clinical recommendations.
 
 ---
 
 ## 16. Open Research Questions
+
 Unanswered by currently reviewed literature:
 
-1. Can deep learning outperform DEG-to-PPI workflows?
+1. Can deep learning outperform DEG-to-PPI workflows for SLE-specific biomarker discovery?
 2. Which hub genes remain important under graph-learning approaches?
 3. Can ML recover biologically meaningful genes removed by traditional thresholds?
 4. How accurately can transcriptomics alone predict therapeutic targets?
@@ -604,6 +779,18 @@ Unanswered by currently reviewed literature:
 27. How can Federated Learning models be continuously audited for privacy leakage and security vulnerabilities?
 28. What stakeholder approval workflows should be incorporated into future healthcare AI systems?
 29. Which Federated Learning architecture is most suitable for a future multi-institution SLE Digital Twin?
+30. Which components of a future SLE-DT should be restricted to clinician-only access?
+31. How can patient rights, privacy, and informed consent be protected while maintaining model utility?
+32. Should predictive outputs be partially restricted to reduce risks associated with self-diagnosis or treatment modification?
+33. What safeguards are needed to prevent intentional or accidental corruption of training data?
+34. How should continuous auditing and regulatory compliance be operationalized within a future clinical platform?
+35. Which transfer-learning strategy, if any, is most appropriate for limited SLE transcriptomic datasets?
+36. Which disease-modeling paradigm from broader Immune Digital Twin literature best maps to SLE immune-state restoration?
+37. Are there publicly available SLE-specific TCR-seq datasets suitable for model training?
+38. Can Multi-Instance Learning be adapted to represent lupus patients as immune-repertoire bags?
+39. Could attention mechanisms identify lupus-specific immune-sequence signatures?
+40. How should TCR-derived features be integrated with transcriptomic endotypes in a future SLE-DT?
+41. Can transfer learning from non-SLE autoimmune TCR models improve SLE immune-repertoire modeling?
 
 ---
 
@@ -615,16 +802,32 @@ Unanswered by currently reviewed literature:
 - Federated Learning does not eliminate privacy risk because model updates and parameters can leak sensitive information.
 - Security, privacy, legal, and governance expertise should be incorporated from the beginning of future healthcare AI or federated-learning projects.
 - The Federated Learning review does **not** justify expanding the MVP; it informs future architecture and governance requirements.
+- Immune Digital Twins should model both disease/pathology-specific events and immune responses.
+- FAIR principles, modular design, scalability, explainability, access control, validation, auditing, and regulatory awareness should guide the architecture.
+- Drug-response Digital Twins are more complex than the current transcriptomics-first immune-state MVP and should remain future work.
+- CNN, BiLSTM-attention, amino-acid encoding, and Multi-Instance Learning are potentially relevant mathematical concepts for future immune-repertoire modules, but the reviewed paper does not validate them for SLE.
+- The reviewed TCR paper demonstrates strong performance for T1D, MS, RA, and IAA, but its findings cannot be assumed to generalize to SLE.
+
+---
+
+### 16.2 Questions Resolved by Current Literature
+- Are any mathematical models from the TCR article conceptually applicable to SLE-DT?  
+  **Yes, conceptually.** Multi-Instance Learning, CNN motif detection, BiLSTM-attention sequence modeling, biochemical sequence encoding, and attention-based interpretability may inform future modules. They are not part of the MVP because SLE-specific validation is absent.
+
+- Should TCR-seq be included in the thesis MVP?  
+  **No.** The reviewed article does not include SLE and relies on a different modality than the current transcriptomic MVP.
 
 ---
 
 ## 17. Expected Thesis Contributions
-- Explainable SLE Digital Twin architecture.
+- Explainable SLE Immune Digital Twin architecture.
 - Molecular-endotype-aware disease modeling.
 - Immune-tolerance restoration framework.
 - Heterogeneity-aware patient stratification.
-- Validation-oriented healthcare Digital Twin methodology.
+- FAIR-aligned and modular healthcare Digital Twin methodology.
+- Validation-oriented Digital Twin design.
 - Governance-aware design roadmap.
+- Future-ready immune-repertoire modeling roadmap.
 - Reproducible research platform.
 
 ---
@@ -632,9 +835,9 @@ Unanswered by currently reviewed literature:
 ## 18. Final MVP Recommendation
 The recommended thesis MVP remains:
 
-**A transcriptomics-first, molecular-endotype-aware, explainable SLE Digital Twin for immune-state modeling and immune-tolerance-restoration hypothesis generation.**
+**A modular, FAIR-aligned, transcriptomics-first, molecular-endotype-aware, explainable SLE Immune Digital Twin for immune-state modeling and immune-tolerance-restoration hypothesis generation.**
 
-The MVP should not include Federated Learning, multi-omics integration, EHR integration, wearables, real-time monitoring, clinical decision support, or protected-data processing. These are retained as future roadmap items.
+The MVP should not include Federated Learning, multi-omics integration, EHR integration, wearables, real-time monitoring, clinical decision support, protected-data processing, organ-specific simulation, drug-response simulation, or TCR-seq deep-learning classification. These are retained as future roadmap items.
 
 ---
 
@@ -664,3 +867,5 @@ The MVP should not include Federated Learning, multi-omics integration, EHR inte
 [12] “Federated Learning Security and Governance in Healthcare.”
 
 [13] A. Niarakis et al., “Immune digital twins for complex human pathologies: applications, limitations, and challenges,” npj Systems Biology and Applications, vol. 10, no. 1, Art. no. 141, 2024, doi: 10.1038/s41540-024-00450-5.
+
+[14] D. Yang, X. Peng, S. Zheng, and S. Peng, “Deep learning-based prediction of autoimmune diseases,” Scientific Reports, vol. 15, no. 1, 2025, doi: 10.1038/s41598-025-88477-4.
