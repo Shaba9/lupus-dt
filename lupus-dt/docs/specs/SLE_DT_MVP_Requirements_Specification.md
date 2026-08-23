@@ -1,13 +1,15 @@
-# SLE Digital Twin MVP Requirements Specification
+# SLE Digital Twin MVP Requirements Specification (Reduced Thesis Scope)
 
 ## 1. Purpose and Project Definition
 
-This document defines the technical and thesis-deliverable requirements for the Systemic Lupus Erythematosus Digital Twin (SLE-DT) MVP. The project will produce two final deliverables:
+This document defines the minimum viable scope for the Systemic Lupus Erythematosus Digital Twin (SLE-DT) Master's thesis project.
 
-1. **A client-facing SLE-DT research application** with APIs and a machine-learning/digital-twin backend.
-2. **A final publishable thesis paper** describing the scientific motivation, system architecture, methodology, validation results, limitations, and future work.
+The project will produce two deliverables:
 
-The MVP is a research system, not a clinical decision-support tool. It is designed to model SLE immune-state deviation from healthy controls, identify molecular endotypes, simulate pathway-level restoration toward a healthy immune state, and generate explainable candidate biological hypotheses.
+- A research prototype demonstrating a transcriptomics-based immune digital twin for SLE.
+- A publishable Master's thesis paper describing the methodology, implementation, validation, results, limitations, and future work.
+
+The MVP is a research and hypothesis-generation tool only. It is not intended for clinical diagnosis, treatment recommendation, or patient care.
 
 ---
 
@@ -17,666 +19,395 @@ The MVP is a research system, not a clinical decision-support tool. It is design
 
 The final MVP is:
 
-> **A modular, FAIR-aligned, transcriptomics-first, molecular-endotype-aware, explainable SLE Immune Digital Twin for immune-state modeling and immune-tolerance-restoration hypothesis generation.**
+**A transcriptomics-based immune digital twin that measures how far an SLE immune state deviates from a healthy reference state and estimates how pathway normalization could restore immune health.**
 
 ### 2.2 In Scope
 
 The MVP shall include:
 
-- Public bulk transcriptomic datasets for SLE and healthy controls.
-- Healthy reference immune-state modeling.
-- Patient/sample-level SLE immune-state modeling.
-- Differential expression analysis.
-- Pathway enrichment or pathway scoring.
-- Molecular endotype discovery.
-- Disease-state deviation scoring.
-- Virtual pathway-restoration simulation.
-- Explainable pathway/target ranking.
-- A client-facing research application.
-- Backend APIs for data, model inference, simulation, and results retrieval.
-- Verification and validation artifacts.
-- A final publishable thesis paper.
+- One public SLE transcriptomic dataset.
+- Healthy control samples.
+- SLE patient/sample data.
+- Basic preprocessing and quality control.
+- Healthy reference twin construction.
+- Patient/sample twin construction.
+- Pathway activity scoring.
+- Distance-to-health calculation.
+- Simple molecular endotype exploration.
+- Virtual pathway restoration simulation.
+- Streamlit-based research dashboard.
+- Verification and validation documentation.
+- Final publishable thesis paper.
 
 ### 2.3 Out of Scope
 
 The MVP shall not include:
 
 - Clinical deployment.
-- Diagnosis, treatment recommendation, or medication selection.
-- Patient-facing medical advice.
-- Real-time monitoring.
+- Clinical decision support.
+- Drug recommendation.
+- Drug-response simulation.
+- Multi-omics integration.
 - Wearables.
 - EHR integration.
-- Protected health information.
-- Federated learning implementation.
-- Multi-omics integration.
-- TCR-seq model training.
-- Drug-response simulation.
-- Organ-specific or whole-body lupus simulation.
-- Regulatory submission.
+- Real-time monitoring.
+- Federated learning.
+- Large-scale explainability engines.
+- Protein interaction network analysis.
+- Complex ranking frameworks.
+- Production APIs.
+- Multi-dataset benchmarking.
 
 These items may be discussed as future work.
 
 ---
 
-## 3. Literature-Driven Design Rationale
+## 3. Thesis Research Question
 
-### 3.1 Transcriptomics-First MVP
+### Primary Question
 
-The project remains transcriptomics-first because reviewed SLE DEG literature supports the use of public gene-expression datasets, healthy controls, differential gene expression, pathway enrichment, and PPI analysis for identifying reproducible SLE molecular mechanisms [1]–[6].
+Can a transcriptomics-based immune digital twin quantify how far an SLE immune state deviates from a healthy immune state?
 
-### 3.2 Molecular Endotype Requirement
+### Secondary Question
 
-Molecular stratification is required because SLE is heterogeneous, and the reviewed precision-rheumatology and SLE-personalized-treatment literature emphasizes biological subtyping as central to precision medicine [7], [10], [11].
-
-### 3.3 Immune Digital Twin Framing
-
-The system is framed as an Immune Digital Twin because reviewed IDT architecture literature states that immune twins should model both disease/pathology-specific events and immune-system responses [13].
-
-### 3.4 Neutrophil, Interferon, B-Cell, and T-Cell Biology
-
-The biological model must prioritize:
-
-- Neutrophil activation, neutrophil-mediated immunity, and neutrophil degranulation from the SLE DEG review [1].
-- Type-I interferon signaling from precision-rheumatology literature [7].
-- B-cell/autoantibody biology and patient subtyping from SLE-personalized-treatment literature [10].
-- T-cell and immune-repertoire modeling as future work, informed by deep-learning/TCR literature but not included in the MVP because the reviewed TCR paper did not include SLE [14].
-
-### 3.5 Governance and Validation
-
-Security, privacy, governance, and validation are requirements because healthcare AI and federated-learning literature emphasizes stakeholder review, privacy risk, security risk, access control, and lifecycle governance [12], [13]. For the MVP, these requirements are limited to public-data governance, reproducibility, traceability, and clear non-clinical-use statements.
+Can pathway-level virtual restoration move an SLE immune-state representation closer to a healthy reference state?
 
 ---
 
-## 4. Final Deliverable 1: Client-Facing SLE-DT Application
+## 4. Final Deliverable 1: Research Application
 
 ### 4.1 Application Goal
 
-The client-facing application shall allow a user to explore SLE digital-twin outputs generated from public transcriptomic data. It should make the research workflow understandable through interactive visualizations, explainable rankings, and reproducible output summaries.
+The application shall allow users to:
+
+- Explore healthy immune-state baselines.
+- Explore SLE immune-state deviations.
+- Compare patient samples against healthy references.
+- Simulate pathway restoration.
+- Review validation evidence.
 
 ### 4.2 Primary Users
 
-The MVP application is intended for:
-
-- Thesis evaluators.
-- Biomedical informatics researchers.
+- Thesis committee members.
+- Biomedical engineering faculty.
+- Bioinformatics researchers.
 - Computational biology reviewers.
-- Rheumatology or immunology advisors.
-- Future collaborators evaluating the research platform.
-
-It is not intended for patients or clinical decision-making.
+- Future collaborators.
 
 ### 4.3 Required User Workflows
 
-The application shall support the following workflows:
+#### Dataset Overview
 
-1. **Dataset Overview**
-   - View datasets used.
-   - View sample counts, controls, SLE samples, data source, and preprocessing status.
+Users shall be able to:
 
-2. **Healthy Reference Twin Exploration**
-   - View healthy baseline pathway activity.
-   - View baseline gene-expression summary.
+- View dataset information.
+- View sample counts.
+- View preprocessing status.
 
-3. **SLE Patient/Sample Twin Exploration**
-   - Select a patient/sample or representative sample.
-   - View immune-state deviation from healthy baseline.
-   - View activated or suppressed pathways.
+#### Healthy Reference Twin
 
-4. **Molecular Endotype Exploration**
-   - View molecular clusters/endotypes.
-   - Compare pathway activity across endotypes.
-   - View endotype-specific disease drivers.
+Users shall be able to:
 
-5. **Virtual Restoration Simulation**
-   - Select a pathway or ranked pathway set.
-   - Simulate partial restoration toward healthy-state activity.
-   - View predicted reduction in distance-to-health.
+- View healthy pathway activity.
+- View healthy baseline summaries.
 
-6. **Explainable Target/Pathway Ranking**
-   - View ranked pathways and candidate genes.
-   - View evidence supporting each ranking.
-   - View DEG, pathway, network, and restoration-score contributions.
+#### Patient Twin
 
-7. **Export Results**
-   - Export summary tables.
-   - Export figures for thesis/paper use.
-   - Export model run metadata.
+Users shall be able to:
+
+- Select an SLE sample.
+- View pathway deviations.
+- View distance-to-health score.
+
+#### Endotype Exploration
+
+Users shall be able to:
+
+- View sample clusters.
+- Compare clusters using pathway activity.
+
+#### Virtual Restoration Simulation
+
+Users shall be able to:
+
+- Select a pathway.
+- Adjust the pathway toward healthy values.
+- Observe resulting distance-to-health changes.
+
+#### Validation Review
+
+Users shall be able to:
+
+- View biological validation results.
+- View technical validation results.
 
 ### 4.4 Required UI Views
 
-The client-facing application shall include:
-
-- Landing / project overview page.
-- Dataset inventory page.
-- Healthy reference twin page.
-- Patient/sample twin page.
-- Molecular endotype dashboard.
-- Pathway deviation dashboard.
-- Virtual perturbation / restoration simulation page.
-- Explainable ranking page.
-- Validation summary page.
-- Export/download page.
+- Overview page.
+- Healthy Reference Twin page.
+- Patient Twin page.
+- Endotype page.
+- Restoration Simulation page.
+- Validation page.
 
 ### 4.5 Required Visualizations
 
-The application should include, where feasible:
-
-- Heatmap of pathway activity across samples/endotypes.
-- Healthy vs SLE pathway deviation plot.
-- Endotype clustering visualization.
-- Ranked pathway/target bar chart.
-- Restoration-score plot.
-- Gene/pathway contribution table.
+- PCA or clustering plot.
+- Healthy vs SLE pathway comparison chart.
+- Distance-to-health chart.
+- Endotype cluster visualization.
+- Restoration impact visualization.
 - Validation summary table.
 
 ---
 
-## 5. Final Deliverable 1: API Requirements
+## 5. Machine Learning and Digital Twin Requirements
 
-### 5.1 API Role
+### 5.1 Model Objective
 
-The API layer shall separate the client application from the analysis/model layer. It should expose reproducible endpoints for retrieving datasets, model outputs, pathway scores, endotypes, simulations, and validation results.
+The model shall represent each SLE sample as an immune-state twin and compare it with a healthy reference twin.
 
-### 5.2 Required API Endpoints
+### 5.2 Data Inputs
 
-The MVP API should include endpoints equivalent to:
+Required inputs:
 
-```text
-GET /api/health
-GET /api/datasets
-GET /api/datasets/{dataset_id}/summary
-GET /api/reference/healthy
-GET /api/twins
-GET /api/twins/{sample_id}
-GET /api/twins/{sample_id}/deviation
-GET /api/endotypes
-GET /api/endotypes/{endotype_id}
-GET /api/pathways
-GET /api/pathways/rankings
-POST /api/simulations/pathway-restoration
-GET /api/simulations/{simulation_id}
-GET /api/validation/technical
-GET /api/validation/biological
-GET /api/exports/{run_id}
-```
-
-### 5.3 API Output Requirements
-
-API responses should include:
-
-- Data payload.
-- Method metadata.
-- Model/run identifier.
-- Timestamp or version identifier.
-- Dataset provenance.
-- Warning that outputs are research hypotheses, not medical recommendations.
-
-### 5.4 API Non-Requirements
-
-The MVP API does not need:
-
-- Authentication for protected patient data.
-- EHR integration.
-- Real-time streaming.
-- Federated training endpoints.
-- Clinical decision-support workflow endpoints.
-
----
-
-## 6. Final Deliverable 1: Machine-Learning and Digital-Twin Model Requirements
-
-### 6.1 Model Objective
-
-The model shall represent each SLE sample/patient as an immune-state twin and compare that state to a healthy reference twin.
-
-### 6.2 Data Inputs
-
-Required MVP inputs:
-
-- Public SLE transcriptomic expression matrix.
-- Healthy control expression matrix.
-- Gene identifiers.
+- Public transcriptomic expression matrix.
+- Healthy control samples.
+- SLE samples.
 - Dataset metadata.
 - Pathway definitions.
 
-Optional, if available:
+### 5.3 Preprocessing Requirements
 
-- Disease activity metadata.
-- Organ involvement metadata.
-- Treatment metadata.
+The pipeline shall include:
 
-### 6.3 Preprocessing Requirements
+- Data ingestion.
+- Quality-control checks.
+- Normalization.
+- Gene identifier harmonization.
+- Missing data handling.
+- Documentation of preprocessing decisions.
 
-The preprocessing pipeline shall include:
+### 5.4 Healthy Reference Twin
 
-1. Dataset ingestion.
-2. Quality-control checks.
-3. Normalization.
-4. Gene identifier harmonization.
-5. Missing-data handling.
-6. Batch-effect assessment and correction where applicable.
-7. Dataset provenance documentation.
-8. Output of processed expression matrix.
+The healthy reference twin shall provide:
 
-### 6.4 Feature Engineering Requirements
+- Healthy baseline pathway scores.
+- Baseline summary statistics.
 
-The model shall generate:
+### 5.5 Patient Immune-State Twin
 
-- Gene-level differential-expression features.
-- Expression deviation scores.
-- Pathway activity scores.
-- Healthy reference pathway profile.
-- Patient/sample pathway profile.
-- Distance-to-health metrics.
-- Endotype labels.
-- Candidate target/pathway features.
+The patient twin shall provide:
 
-### 6.5 Healthy Reference Twin
-
-The healthy reference twin shall represent baseline immune-state behavior using healthy control transcriptomic profiles.
-
-Required outputs:
-
-- Healthy gene-expression baseline.
-- Healthy pathway-activity baseline.
-- Healthy variance or confidence estimates where feasible.
-
-### 6.6 Patient/Sample Immune-State Twin
-
-Each patient/sample twin shall represent deviation from the healthy reference.
-
-Required outputs:
-
-- Gene-level deviation profile.
-- Pathway-level deviation profile.
-- Endotype assignment.
-- Ranked abnormal pathways.
+- Pathway deviation profile.
 - Distance-to-health score.
+- Ranked abnormal pathways.
 
-### 6.7 Molecular Endotype Model
+### 5.6 Distance-to-Health Metric
 
-The model shall cluster or stratify SLE samples into molecular endotypes using transcriptomic/pathway features.
+The system shall compute a quantitative measure representing the distance between:
+
+- Healthy pathway profile.
+- SLE pathway profile.
+
+This metric shall serve as the primary digital twin output.
+
+### 5.7 Endotype Analysis
+
+A simple clustering method may be used.
 
 Required outputs:
 
-- Endotype labels.
-- Endotype-level pathway signatures.
-- Endotype-specific candidate drivers.
-- Endotype stability evaluation.
+- Cluster labels.
+- Cluster pathway signatures.
+- Basic stability discussion.
 
-### 6.8 Virtual Perturbation Engine
+### 5.8 Virtual Restoration Simulation
 
-The perturbation engine shall simulate pathway-level restoration by adjusting abnormal pathway scores toward the healthy reference.
+The simulation module shall:
+
+- Select a pathway.
+- Move pathway activity toward healthy levels.
+- Recalculate distance-to-health.
+- Estimate improvement percentage.
 
 Required outputs:
 
 - Baseline distance-to-health.
-- Post-perturbation distance-to-health.
-- Restoration score.
-- Ranked pathways by predicted restoration impact.
-
-### 6.9 Explainable Ranking Engine
-
-The ranking engine shall prioritize pathways and candidate targets using interpretable evidence.
-
-Ranking factors may include:
-
-- Differential-expression strength.
-- Pathway deviation magnitude.
-- Network/PPI centrality.
-- Endotype specificity.
-- Restoration score.
-- Cross-dataset reproducibility.
-- Literature-supported relevance.
-
-Required outputs:
-
-- Ranked pathway list.
-- Ranked candidate genes where supported.
-- Explanation for each ranking.
-- Evidence source breakdown.
+- Post-restoration distance-to-health.
+- Improvement score.
 
 ---
 
-## 7. Verification and Validation Requirements
+## 6. Verification and Validation Requirements
 
-### 7.1 Verification Goal
+### 6.1 Verification Goal
 
-Verification confirms that the system was built correctly and that each module performs its intended function.
+Verification confirms the system functions as designed.
 
-### 7.2 Verification Deliverables
-
-The project shall produce:
+### 6.2 Verification Deliverables
 
 - Dataset inventory.
 - Preprocessing log.
-- DEG parameter log.
-- Pathway database/version log.
-- PPI source log.
-- Endotype method log.
-- Twin construction method description.
-- Perturbation method description.
-- Ranking/scoring method description.
-- API endpoint documentation.
+- Pathway scoring documentation.
+- Twin-construction documentation.
+- Simulation documentation.
 - Reproducibility instructions.
 - Known limitations statement.
 
-### 7.3 Technical Validation
+### 6.3 Technical Validation
 
-Technical validation shall evaluate:
+The project shall evaluate:
 
-- Reproducibility of preprocessing and model outputs.
-- Stability of pathway rankings.
-- Cross-dataset consistency.
-- Sensitivity to preprocessing choices.
-- Endotype robustness.
-- API response correctness.
-- Application-to-API integration correctness.
+- Pipeline reproducibility.
+- Consistency of pathway scores.
+- Correct distance calculations.
+- Dashboard functionality.
 
-### 7.4 Biological Validation
+### 6.4 Biological Validation
 
-Biological validation shall verify whether the system recovers known SLE-relevant biology:
+The system shall attempt to recover known SLE biology:
 
-- Neutrophil activation / degranulation / neutrophil-mediated immunity [1].
-- Type-I interferon signaling [7].
-- B-cell-related immune signatures [10].
-- Published hub genes from DEG/PPI literature: CCNB2, CDCA8, AURKB, BUB1B, RRM2, BIRC5, UBE2C [1].
+- Type I interferon signaling.
+- Neutrophil activation.
+- B-cell related signatures.
 
-### 7.5 Endotype Validation
+### 6.5 Application Validation
 
-Endotype validation shall assess:
+The project shall verify:
 
-- Cluster stability.
-- Cohort reproducibility.
-- Biological interpretability.
-- Within-endotype pathway consistency.
-- Differences in pathway ranking across endotypes.
+- Dashboard pages load correctly.
+- Visualizations match backend outputs.
+- Simulations produce expected results.
+- Non-clinical-use notice is displayed.
 
-### 7.6 Application Validation
+### 6.6 Acceptance Criteria
 
-The client-facing application shall be validated by confirming:
+The MVP is complete when:
 
-- All required pages load successfully.
-- API calls return expected outputs.
-- Visualizations match backend results.
-- Exported tables/figures match model outputs.
-- Medical-use disclaimers are visible.
-
-### 7.7 Acceptance Criteria
-
-The MVP is complete only if it demonstrates:
-
-- Successful construction of a healthy reference twin.
-- Successful construction of patient/sample immune-state twins.
-- Reproducible DEG and pathway outputs.
-- At least one interpretable molecular endotype analysis.
-- A documented twin-comparison method.
-- A documented virtual-perturbation method.
-- Ranked candidate pathways/targets with explainability evidence.
-- Recovery or clear discussion of known SLE mechanisms.
-- A working client-facing application.
-- Working API endpoints.
-- Clear separation between research hypotheses and clinical recommendations.
-- A completed publishable paper draft.
+- Healthy reference twin is implemented.
+- Patient twin is implemented.
+- Distance-to-health is implemented.
+- Pathway scoring is implemented.
+- Virtual restoration is implemented.
+- Biological validation is completed.
+- Dashboard is functional.
+- Thesis manuscript draft is complete.
 
 ---
 
-## 8. Governance, Ethics, and Responsible AI Requirements
+## 7. Governance and Ethics
 
-### 8.1 MVP Governance
+The system shall include:
 
-Because the MVP uses public datasets only and does not process protected health information, production healthcare compliance workflows are not required. However, the system shall still include:
-
-- Dataset provenance documentation.
-- Dataset usage documentation.
+- Dataset provenance.
+- Citation of public datasets.
 - Reproducibility documentation.
-- Code and model traceability.
 - Non-clinical-use disclaimer.
-- Documentation of model limitations.
+- Limitation documentation.
 
-### 8.2 Security and Privacy Scope
-
-The MVP shall not process PHI. Future versions involving clinical or institutional data should incorporate:
-
-- Access control.
-- Encryption.
-- Threat modeling.
-- Privacy impact assessment.
-- Security review.
-- Governance approval workflows.
-
-### 8.3 Future Federated Learning
-
-Federated learning may support future multi-institutional SLE-DT development, but it is not part of the MVP. Reviewed literature emphasizes that federated learning does not eliminate privacy risk because model updates can leak sensitive information [12].
+The system shall not process protected health information.
 
 ---
 
-## 9. Development Plan From Inception to Thesis Completion
+## 8. Development Plan
 
-### Phase 1: Requirements and Literature Consolidation
+### Week 1
 
-Deliverables:
+- Literature review.
+- Dataset selection.
+- Research question finalization.
 
-- Final requirements specification.
-- Dataset selection criteria.
-- Final MVP scope.
-- Thesis research questions.
+### Week 2
 
-### Phase 2: Data Pipeline
+- Data ingestion.
+- Quality control.
+- Preprocessing implementation.
 
-Deliverables:
-
-- Dataset inventory.
-- Data ingestion scripts.
-- Preprocessing workflow.
-- Quality-control report.
-- Processed expression matrix.
-
-### Phase 3: Model Development
-
-Deliverables:
+### Week 3
 
 - Healthy reference twin.
-- Patient/sample twin representation.
-- Pathway scoring model.
-- Endotype model.
-- Virtual perturbation engine.
-- Explainable ranking engine.
+- Pathway scoring.
 
-### Phase 4: Application and API Development
+### Week 4
 
-Deliverables:
+- Patient twin implementation.
+- Distance-to-health metric.
 
-- Backend API.
-- Client-facing dashboard.
-- Visualization components.
-- Export functions.
-- API documentation.
+### Week 5
 
-### Phase 5: Verification and Validation
+- Endotype clustering.
+- Preliminary analysis.
 
-Deliverables:
+### Week 6
 
-- Technical validation report.
-- Biological validation report.
-- Endotype validation report.
-- Application validation checklist.
-- Reproducibility package.
+- Restoration simulation.
+- Validation experiments.
 
-### Phase 6: Thesis Paper and Publication Package
+### Week 7
 
-Deliverables:
+- Dashboard development.
+- Visualization development.
 
-- Final publishable paper.
-- Figures and tables.
-- Methods appendix.
-- Limitations and future work section.
-- GitHub/repository documentation if applicable.
+### Week 8
+
+- Thesis writing.
+- Figures.
+- Results.
+- Final validation package.
 
 ---
 
-## 10. Final Deliverable 2: Publishable Paper Requirements
+## 9. Final Deliverable 2: Publishable Paper
 
-### 10.1 Paper Goal
+### 9.1 Paper Goal
 
-The final paper shall describe the SLE-DT MVP as a reproducible, explainable, transcriptomics-first Immune Digital Twin framework for SLE immune-state modeling and tolerance-restoration hypothesis generation.
+Describe a lightweight immune digital twin framework for quantifying SLE immune-state deviation and simulating pathway restoration.
 
-### 10.2 Recommended Paper Structure
+### 9.2 Recommended Paper Structure
 
-1. **Title**
-   - Example: *A Transcriptomics-First Molecular-Endotype-Aware Immune Digital Twin for Systemic Lupus Erythematosus*
+- Abstract
+- Introduction
+- Related Work
+- Methods
+- System Architecture
+- Validation
+- Results
+- Discussion
+- Limitations
+- Future Work
+- Conclusion
 
-2. **Abstract**
-   - SLE motivation.
-   - Digital-twin objective.
-   - Dataset/method overview.
-   - MVP contributions.
-   - Key validation results.
+### 9.3 Required Figures
 
-3. **Introduction**
-   - SLE heterogeneity.
-   - Need for precision modeling.
-   - Digital twins and immune-state modeling.
-   - Thesis contribution.
+- System architecture diagram.
+- Data processing workflow.
+- Healthy vs SLE comparison.
+- Endotype visualization.
+- Restoration simulation visualization.
+- Dashboard screenshot.
 
-4. **Related Work**
-   - SLE DEG/pathway literature.
-   - AI and biomarkers in rheumatology.
-   - Immune Digital Twins.
-   - Digital health/governance.
-   - Deep learning/TCR work as future context.
+### 9.4 Required Tables
 
-5. **Methods**
-   - Datasets.
-   - Preprocessing.
-   - DEG analysis.
-   - Pathway scoring.
-   - Endotype discovery.
-   - Healthy reference twin construction.
-   - Patient twin construction.
-   - Virtual perturbation.
-   - Explainability and ranking.
-
-6. **System Architecture**
-   - Client application.
-   - APIs.
-   - ML/digital-twin backend.
-   - Data/model artifacts.
-
-7. **Validation**
-   - Technical validation.
-   - Biological validation.
-   - Endotype validation.
-   - Application/API validation.
-
-8. **Results**
-   - DEG/pathway results.
-   - Endotype results.
-   - Twin comparison examples.
-   - Perturbation ranking results.
-   - Biological interpretation.
-
-9. **Discussion**
-   - Interpretation of findings.
-   - How results align with SLE literature.
-   - MVP value and limitations.
-   - Why future modules are deferred.
-
-10. **Limitations**
-    - Public datasets only.
-    - Bulk transcriptomics only.
-    - No clinical validation.
-    - No treatment recommendation.
-    - Dataset heterogeneity.
-    - No SLE-specific TCR modeling in MVP.
-
-11. **Future Work**
-    - Multi-omics.
-    - Single-cell.
-    - TCR repertoire modeling.
-    - Federated learning.
-    - EHR/wearable integration.
-    - Drug-response modeling.
-
-12. **Conclusion**
-    - Summary of MVP contribution.
-    - Research value.
-    - Path toward future SLE Digital Twin development.
-
-### 10.3 Required Paper Figures
-
-The final paper should include:
-
-- SLE-DT architecture diagram.
-- Data-processing pipeline diagram.
-- Healthy-vs-SLE twin comparison diagram.
-- Molecular endotype visualization.
-- Pathway ranking visualization.
-- Virtual perturbation/restoration diagram.
-- Client application screenshot or wireframe.
-
-### 10.4 Required Paper Tables
-
-The final paper should include:
-
-- Dataset inventory table.
-- MVP vs future-work scope table.
-- Pathway/target ranking table.
-- Validation metrics table.
-- Literature-to-requirements traceability table.
+- Dataset inventory.
+- Validation metrics.
+- Pathway ranking summary.
+- Scope reduction and future work table.
 
 ---
 
-## 11. Final MVP Acceptance Checklist
+## 10. Final MVP Acceptance Checklist
 
-The project is ready for final submission when all items below are complete:
-
-- [ ] Public datasets selected and documented.
-- [ ] Preprocessing pipeline implemented.
-- [ ] Healthy reference twin implemented.
-- [ ] Patient/sample immune-state twin implemented.
-- [ ] Pathway scoring implemented.
-- [ ] Molecular endotype discovery implemented.
-- [ ] Virtual perturbation implemented.
-- [ ] Explainable ranking implemented.
-- [ ] Backend API implemented.
-- [ ] Client-facing application implemented.
-- [ ] Validation report completed.
-- [ ] Biological interpretation completed.
-- [ ] Paper figures generated.
-- [ ] Publishable paper drafted.
-- [ ] Limitations clearly documented.
-- [ ] Non-clinical-use disclaimer included.
-
----
-
-## 12. References (IEEE)
-
-[1] Y. Zhao et al., “Identification of Biomarkers and Pathways in Systemic Lupus Erythematosus Through Integrated Bioinformatics Analysis,” 2021.
-
-[2] GSE162828, Gene Expression Omnibus.
-
-[3] GSE169080, Gene Expression Omnibus.
-
-[4] STRING Database.
-
-[5] Cytoscape Network Analysis Platform.
-
-[6] M. E. Ritchie et al., “limma: Linear Models for Microarray and RNA-Seq Data Analysis.”
-
-[7] “Artificial Intelligence, Biomarkers, and Precision Medicine in Autoimmune Inflammatory Rheumatic Diseases.”
-
-[8] “Digital Twins and the Metaverse in Healthcare and Industry.”
-
-[9] “Artificial Intelligence and Autoimmune Disease Research Trends,” 2025.
-
-[10] “AI for Systemic Lupus Erythematosus Personalized Treatment.”
-
-[11] “The Role of Health Information Technology in the Control and Management of Systemic Lupus Erythematosus.”
-
-[12] “Federated Learning Security and Governance in Healthcare.”
-
-[13] A. Niarakis et al., “Immune digital twins for complex human pathologies: applications, limitations, and challenges,” npj Systems Biology and Applications, vol. 10, no. 1, Art. no. 141, 2024, doi: 10.1038/s41540-024-00450-5.
-
-[14] D. Yang, X. Peng, S. Zheng, and S. Peng, “Deep learning-based prediction of autoimmune diseases,” Scientific Reports, vol. 15, no. 1, 2025, doi: 10.1038/s41598-025-88477-4.
+- Dataset selected.
+- Preprocessing implemented.
+- Healthy twin implemented.
+- Patient twin implemented.
+- Pathway scoring implemented.
+- Distance-to-health implemented.
+- Endotype analysis completed.
+- Restoration simulation implemented.
+- Dashboard completed.
+- Validation completed.
+- Thesis draft completed.
+- Limitations documented.
+- Non-clinical-use disclaimer included.
